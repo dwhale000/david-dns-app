@@ -11,11 +11,16 @@ upstream:
 blocking:
   denylists:
     porn:
-      # 1) Big public porn blocklist (maintained by others, huge coverage).
-      #    Blocky reads this even though it's a different text format.
+      # 1) oisd NSFW — curated, rebuilt daily, lowest false positives. Primary.
+      - https://nsfw.oisd.nl/
+
+      # 2) StevenBlack porn-only — conservative, high-quality, daily updates.
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn-only/hosts
+
+      # 3) Blocklist Project porn — broad community list (largest coverage).
       - https://raw.githubusercontent.com/blocklistproject/Lists/master/porn.txt
 
-      # 2) YOUR custom list (same wildcard format as the gambling list).
+      # 4) YOUR custom list (same wildcard format as the gambling list).
       #    NOTE: update "dwhale000/david-dns-app" below if the GitHub repo
       #    lives under a different account/name.
       - https://raw.githubusercontent.com/dwhale000/david-dns-app/main/porn-blocklist.txt
