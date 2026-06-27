@@ -9,7 +9,7 @@ upstream:
 
 # Blocklist configuration
 blocking:
-  blackLists:
+  denylists:
     porn:
       # 1) Big public porn blocklist (maintained by others, huge coverage).
       #    Blocky reads this even though it's a different text format.
@@ -35,13 +35,12 @@ blocking:
 
   # Enable blocking
   loading:
+    # How often to refresh the blocklist
+    refreshPeriod: 1h
     downloads:
       timeout: 60s
       attempts: 5
       cooldown: 10s
-
-  # How often to refresh the blocklist
-  refreshPeriod: 1h
 
 # Ports configuration
 ports:
