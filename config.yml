@@ -1,0 +1,77 @@
+# Blocky DNS Server Configuration
+# Blocks porn websites using a public list + your own custom list
+
+# Upstream DNS servers (where to forward allowed queries)
+upstream:
+  default:
+    - 1.1.1.1  # Cloudflare
+    - 8.8.8.8  # Google DNS
+
+# Blocklist configuration
+blocking:
+  blackLists:
+    porn:
+      # 1) Big public porn blocklist (maintained by others, huge coverage).
+      #    Blocky reads this even though it's a different text format.
+      - https://raw.githubusercontent.com/blocklistproject/Lists/master/porn.txt
+
+      # 2) YOUR custom list (same wildcard format as the gambling list).
+      #    NOTE: update "dwhale000/david-dns-app" below if the GitHub repo
+      #    lives under a different account/name.
+      - https://raw.githubusercontent.com/dwhale000/david-dns-app/main/porn-blocklist.txt
+
+      # TO UPDATE YOUR LIST:
+      # 1. Edit porn-blocklist.txt locally
+      # 2. Commit and push the update
+      # 3. Wait for Blocky to refresh it automatically
+
+  # Apply porn blocklist to ALL clients
+  clientGroupsBlock:
+    default:
+      - porn
+
+  # What to return for blocked domains
+  blockType: zeroIp  # Returns 0.0.0.0 for IPv4, :: for IPv6
+
+  # Enable blocking
+  loading:
+    downloads:
+      timeout: 60s
+      attempts: 5
+      cooldown: 10s
+
+  # How often to refresh the blocklist
+  refreshPeriod: 1h
+
+# Ports configuration
+ports:
+  dns: 53      # Standard DNS port
+  http: 8080   # HTTP port for DoH
+  https: 443   # HTTPS port for DoH (DNS-over-HTTPS)
+  dohPath: /dns-query
+
+# Logging
+log:
+  level: info
+  format: text
+  timestamp: true
+
+# Enable query logging - shows BLOCKED queries
+queryLog:
+  type: console
+  target: stdout
+  logRetentionDays: 0
+  fields:
+    - clientIP
+    - clientName
+    - responseReason
+    - responseAnswer
+    - question
+    - duration
+
+# Enable prometheus metrics (optional)
+prometheus:
+  enable: false
+
+# Bootstrap DNS (used for external lookups such as upstream resolvers)
+bootstrapDns: tcp+udp:1.1.1.1

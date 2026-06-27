@@ -1,0 +1,19 @@
+# David DNS - Porn Blocklist
+# Maintained by David
+# Last updated: 2026-06-26
+#
+# Format: same as the gambling list.
+#   *.example.com   blocks example.com and ALL subdomains
+#   .example.com    blocks example.com and ALL subdomains
+#   example.com     blocks just that exact domain
+#
+# This is YOUR custom list for sites you want to add by hand.
+# A large public porn list is ALSO loaded automatically (see config.yml),
+# so you do NOT need to list everything here yourself.
+#
+# TO UPDATE:
+#   1. Add domains below
+#   2. Commit and push to the david-dns-app GitHub repo
+#   3. The live server refreshes within 1 hour automatically
+
+# --- Your custom additions go below this line ---
