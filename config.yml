@@ -11,14 +11,15 @@ upstream:
 blocking:
   denylists:
     porn:
-      # 1) oisd NSFW — curated, rebuilt daily, lowest false positives. Primary.
-      - https://nsfw.oisd.nl/
-
-      # 2) StevenBlack porn-only — conservative, high-quality, daily updates.
+      # 1) StevenBlack porn-only — conservative, high-quality, daily updates.
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn-only/hosts
 
-      # 3) Blocklist Project porn — broad community list (largest coverage).
+      # 2) Blocklist Project porn — broad community list (largest coverage).
       - https://raw.githubusercontent.com/blocklistproject/Lists/master/porn.txt
+
+      # NOTE: oisd NSFW (https://nsfw.oisd.nl/) was tried but its server times
+      # out when fetched from Fly's datacenter IPs, so it never loaded. Left out
+      # for reliability. The two lists above already overlap with it heavily.
 
       # 4) YOUR custom list (same wildcard format as the gambling list).
       #    NOTE: update "dwhale000/david-dns-app" below if the GitHub repo
